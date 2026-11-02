@@ -404,6 +404,7 @@ class MainActivity : ThemedActivity(),
             }
 
             R.id.nav_group -> displayFragment(GroupFragment())
+            R.id.nav_bunker_parser -> displayFragment(BunkerParserFragment())
             R.id.nav_route -> displayFragment(RouteFragment())
             R.id.nav_settings -> displayFragment(SettingsFragment())
             R.id.nav_traffic -> displayFragment(DashboardFragment())

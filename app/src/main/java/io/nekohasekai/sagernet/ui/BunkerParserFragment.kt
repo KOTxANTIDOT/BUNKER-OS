@@ -150,7 +150,7 @@ class BunkerParserFragment : ToolbarFragment() {
         column.addView(status, LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
         ))
-        return scroll
+        return screen
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

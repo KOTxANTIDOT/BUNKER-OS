@@ -178,11 +178,12 @@ class BunkerParserFragment : ToolbarFragment() {
     }
 
     private fun loadFile(uri: Uri) {
+        val resolver = requireContext().contentResolver
         status.text = "ЧТЕНИЕ ФАЙЛА…"
         viewLifecycleOwner.lifecycleScope.launch {
             try {
                 val content = withContext(Dispatchers.IO) {
-                    requireContext().contentResolver.openInputStream(uri)?.bufferedReader(Charsets.UTF_8)?.use { it.readText() }
+                    resolver.openInputStream(uri)?.bufferedReader(Charsets.UTF_8)?.use { it.readText() }
                         ?: throw IllegalStateException("Не удалось открыть файл")
                 }
                 input.setText(content)

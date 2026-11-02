@@ -20,3 +20,10 @@ jobs:
         uses: ./.github/actions/android-build
         with:
           tasks: app:testOssDebugUnitTest app:assembleOssDebug
+      - name: Upload Bunker Cat debug APK
+        uses: actions/upload-artifact@v7
+        with:
+          name: Bunker-Cat-debug-${{ github.sha }}
+          path: app/build/outputs/apk/oss/debug/*.apk
+          if-no-files-found: error
+          retention-days: 14

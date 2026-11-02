@@ -127,13 +127,13 @@ class MainActivity : ThemedActivity(),
         })
 
         if (savedInstanceState == null) {
-            displayFragmentWithId(R.id.nav_configuration)
+            displayFragmentWithId(R.id.nav_bunker_home)
         } else {
             currentMainFragment =
                 supportFragmentManager.findFragmentById(R.id.fragment_holder) as? ToolbarFragment
         }
         onBackPressedDispatcher.addCallback {
-            if (supportFragmentManager.findFragmentById(R.id.fragment_holder) is ConfigurationFragment) {
+            if (supportFragmentManager.findFragmentById(R.id.fragment_holder) is ConfigurationFragment || supportFragmentManager.findFragmentById(R.id.fragment_holder) is BunkerHomeFragment) {
                 moveTaskToBack(true)
             } else {
                 displayFragmentWithId(R.id.nav_configuration)
@@ -362,7 +362,7 @@ class MainActivity : ThemedActivity(),
         showWhenConnected: Boolean,
         animate: Boolean,
     ) {
-        val showControls = fragment is ConfigurationFragment
+        val showControls = fragment is ConfigurationFragment || fragment is BunkerHomeFragment
         binding.stats.useExternalScrollDriver = fragment is ConfigurationFragment
         binding.stats.syncMainControls(
             showControls,
@@ -399,6 +399,7 @@ class MainActivity : ThemedActivity(),
 
     fun displayFragmentWithId(@IdRes id: Int): Boolean {
         when (id) {
+            R.id.nav_bunker_home -> displayFragment(BunkerHomeFragment())
             R.id.nav_configuration -> {
                 displayFragment(ConfigurationFragment())
             }
@@ -435,6 +436,7 @@ class MainActivity : ThemedActivity(),
         when (val fragment = currentMainFragment ?: supportFragmentManager.findFragmentById(R.id.fragment_holder)) {
             is RouteFragment -> fragment.onServiceStateChanged()
             is DashboardFragment -> fragment.onServiceStateChanged()
+            is BunkerHomeFragment -> fragment.onServiceStateChanged()
         }
 
         binding.fab.changeState(state, DataStore.serviceState, animate)

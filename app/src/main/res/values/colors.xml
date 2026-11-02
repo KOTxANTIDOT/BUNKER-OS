@@ -93,7 +93,8 @@
     <color name="color_pink_ssr">#fb7299</color>
     <color name="color_verdant_mint">#00B96B</color>
     <color name="color_verdant_mint_dark">#00875E</color>
-    <color name="color_verdant_mint_accent">#00D685</color>
+    <color name="color_verdant_mint_accent">#00E59B</color>
+    <color name="color_bunker_violet">#A855F7</color>
 
     <!-- White theme -->
     <color name="color_white_theme">#FFFFFF</color>

@@ -26,7 +26,7 @@
 <string name="compact_profile_rows_sum">Показывать каждый профиль одной короткой строкой только с именем и задержкой</string>
 <string name="compact_group_cards">Компактные карточки групп</string>
 <string name="compact_group_cards_sum">Показывать шкалу использования и оставшееся время вместо ссылки и подробностей подписки</string>
-<string name="app_desc">Универсальный набор инструментов прокси для Android, написанный на Kotlin.</string>
+<string name="app_desc">VPN-клиент и парсер конфигураций Бункера Кота.</string>
 <string name="app_tls_version">Минимальная версия TLS протокола</string>
 <string name="app_version">Версия</string>
 <string name="http_proxy_bypass">Список обхода HTTP-прокси</string>
@@ -113,7 +113,7 @@
 <string name="menu_about">О приложении</string>
 <string name="menu_configuration">Конфигурация</string>
 <string name="menu_dashboard">Панель sing-box</string>
-<string name="menu_group">Группы</string>
+<string name="menu_group">Подписки</string>
 <string name="menu_log">Журналы</string>
 <string name="menu_route">Маршруты</string>
 <string name="menu_tools">Инструменты</string>

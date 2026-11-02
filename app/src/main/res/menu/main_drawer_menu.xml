@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_configuration" android:icon="@drawable/ic_action_description" android:title="@string/menu_configuration" />
+        <item
+            android:id="@+id/nav_bunker_home"
+            android:icon="@drawable/ic_bunker_cat_mark"
+            android:title="@string/bunker_home" />
+
+
+        <item android:id="@+id/nav_configuration" android:icon="@drawable/ic_action_description" android:title="@string/bunker_servers" />
         <item android:id="@+id/nav_group" android:icon="@drawable/ic_baseline_view_list_24" android:title="@string/menu_group" />
         <item android:id="@+id/nav_bunker_parser" android:icon="@drawable/ic_baseline_manage_search_24" android:title="@string/bunker_parser" />
         <item android:id="@+id/nav_route" android:icon="@drawable/ic_maps_directions" android:title="@string/menu_route" />

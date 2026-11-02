@@ -132,7 +132,7 @@ class BunkerHomeFragment : ToolbarFragment() {
             setPadding(0, dp(22), 0, dp(12))
         })
         refreshConnectionState()
-        return root
+        return screen
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

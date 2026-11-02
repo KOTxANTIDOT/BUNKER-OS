@@ -95,6 +95,9 @@
     <color name="color_verdant_mint_dark">#00875E</color>
     <color name="color_verdant_mint_accent">#00E59B</color>
     <color name="color_bunker_violet">#A855F7</color>
+    <color name="color_bunker_purple">#8B35FF</color>
+    <color name="color_bunker_purple_dark">#5415B5</color>
+    <color name="card_elevated_bunker">#F5EEFF</color>
 
     <!-- White theme -->
     <color name="color_white_theme">#FFFFFF</color>

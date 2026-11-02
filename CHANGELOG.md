@@ -1,3 +1,13 @@
+#### 0.1.0
+
+* Rebrand the Android client as Бункер Кота: OVERDRIVE
+* Add a Bunker home dashboard with direct access to servers, URL testing, parser, subscriptions and statistics
+* Add Bunker parser with text, TXT file and remote URL import
+* Normalize imported profile names and remove duplicate endpoints
+* Apply the black, neon-purple and green visual identity
+* Add the Bunker Cat launcher mark
+* Preserve the existing VPN engine and bulk URL-test implementation
+
 #### 2.0.5
 
 * Add per-group routing profiles **1**

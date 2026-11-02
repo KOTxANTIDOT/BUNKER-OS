@@ -10,6 +10,7 @@ import android.widget.ScrollView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.setPadding
+import androidx.appcompat.widget.Toolbar
 import io.nekohasekai.sagernet.R
 import io.nekohasekai.sagernet.database.DataStore
 import io.nekohasekai.sagernet.bg.BaseService
@@ -35,6 +36,18 @@ class BunkerHomeFragment : ToolbarFragment() {
         val scroll = ScrollView(context).apply {
             clipToPadding = false
             addView(root)
+        }
+        val screen = LinearLayout(context).apply {
+            orientation = LinearLayout.VERTICAL
+            setBackgroundColor(Color.rgb(9, 10, 17))
+            addView(Toolbar(context).apply {
+                id = R.id.toolbar
+                setTitleTextColor(Color.WHITE)
+                setBackgroundColor(Color.TRANSPARENT)
+            }, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(56)))
+            addView(scroll, LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f
+            ))
         }
 
         val hero = MaterialCardView(context).apply {

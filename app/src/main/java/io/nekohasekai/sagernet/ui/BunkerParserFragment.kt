@@ -165,11 +165,7 @@ class BunkerParserFragment : ToolbarFragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             try {
-                val sourceText = withContext(Dispatchers.IO) {
-                    if (raw.startsWith("https://", ignoreCase = true) || raw.startsWith("http://", ignoreCase = true)) {
-                        downloadSource(raw)
-                    } else raw
-                }
+                val sourceText = withContext(Dispatchers.IO) { resolveSourceText(raw) }
                 val result = withContext(Dispatchers.Default) { BunkerParser.parse(sourceText) }
                 if (result.profiles.isEmpty()) {
                     val details = result.rejectedMessages.take(3).joinToString("\n")
@@ -204,6 +200,21 @@ class BunkerParserFragment : ToolbarFragment() {
             } catch (error: Exception) {
                 status.text = "НЕ УДАЛОСЬ ПРОЧИТАТЬ ФАЙЛ\n${error.message ?: error.javaClass.simpleName}"
             }
+        }
+    }
+
+    private fun resolveSourceText(raw: String): String {
+        val lines = raw.lines()
+        if (lines.none { it.trim().startsWith("https://", true) || it.trim().startsWith("http://", true) }) return raw
+        return lines.joinToString("\n") { line ->
+            val candidate = line.trim()
+            if (candidate.startsWith("https://", true) || candidate.startsWith("http://", true)) {
+                val sourceUrl = if (candidate.startsWith("https://github.com/", true) && candidate.contains("/blob/")) {
+                    candidate.replace("https://github.com/", "https://raw.githubusercontent.com/", ignoreCase = true)
+                        .replace("/blob/", "/", ignoreCase = true)
+                } else candidate
+                downloadSource(sourceUrl)
+            } else line
         }
     }
 

@@ -6,7 +6,7 @@
         <item name="colorButtonNormal">?colorAccent</item>
         <item name="colorPrimary">@color/color_bunker_purple</item>
         <item name="colorPrimaryDark">@color/color_bunker_purple_dark</item>
-        <item name="colorAccent">@color/color_bunker_violet</item>
+        <item name="colorAccent">@color/color_verdant_mint_accent</item>
 
         <!-- Bunker Cat mint surface; colour variants may override it -->
         <item name="cardElevatedSurfaceColor">@color/card_elevated_bunker</item>
@@ -62,7 +62,7 @@
         <item name="colorButtonNormal">?colorAccent</item>
         <item name="colorPrimary">@color/color_bunker_purple</item>
         <item name="colorPrimaryDark">@color/color_bunker_purple_dark</item>
-        <item name="colorAccent">@color/color_bunker_purple_accent</item>
+        <item name="colorAccent">@color/color_verdant_mint_accent</item>
 
         <!-- Bunker Cat mint surface; colour variants may override it -->
         <item name="cardElevatedSurfaceColor">@color/card_elevated_bunker</item>
@@ -290,7 +290,7 @@
     <style name="Theme.SagerNet.Pink_SSR" parent="Theme.SagerNet">
         <item name="colorPrimary">@color/color_pink_ssr</item>
         <item name="colorPrimaryDark">@color/color_pink_ssr</item>
-        <item name="colorAccent">@color/color_bunker_purple_accent</item>
+        <item name="colorAccent">@color/color_verdant_mint_accent</item>
         <item name="cardElevatedSurfaceColor">@color/card_elevated_pink_ssr</item>
     </style>
 
@@ -546,7 +546,7 @@
     <style name="Theme.SagerNet.Dialog.Pink_SSR" parent="Theme.SagerNet.Dialog">
         <item name="colorPrimary">@color/color_pink_ssr</item>
         <item name="colorPrimaryDark">@color/color_pink_ssr</item>
-        <item name="colorAccent">@color/color_bunker_purple_accent</item>
+        <item name="colorAccent">@color/color_verdant_mint_accent</item>
         <item name="cardElevatedSurfaceColor">@color/card_elevated_pink_ssr</item>
     </style>
 
@@ -582,7 +582,7 @@
     <style name="Theme.SagerNet.VerdantMint" parent="Theme.SagerNet">
         <item name="colorPrimary">@color/color_bunker_purple</item>
         <item name="colorPrimaryDark">@color/color_bunker_purple_dark</item>
-        <item name="colorAccent">@color/color_bunker_purple_accent</item>
+        <item name="colorAccent">@color/color_verdant_mint_accent</item>
         <item name="cardElevatedSurfaceColor">@color/card_elevated_bunker</item>
     </style>
 
@@ -603,7 +603,7 @@
     <style name="Theme.SagerNet.Dialog.VerdantMint" parent="Theme.SagerNet.Dialog">
         <item name="colorPrimary">@color/color_bunker_purple</item>
         <item name="colorPrimaryDark">@color/color_bunker_purple_dark</item>
-        <item name="colorAccent">@color/color_bunker_purple_accent</item>
+        <item name="colorAccent">@color/color_verdant_mint_accent</item>
         <item name="cardElevatedSurfaceColor">@color/card_elevated_bunker</item>
     </style>
 

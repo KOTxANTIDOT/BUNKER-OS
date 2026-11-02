@@ -10,7 +10,6 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.setPadding
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.card.MaterialCardView
@@ -20,6 +19,8 @@ import io.nekohasekai.sagernet.database.ProfileManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.net.HttpURLConnection
+import java.net.URL
 
 /**
  * Bunker-specific import screen. Parsing is delegated to the existing protocol importer;
@@ -132,7 +133,12 @@ class BunkerParserFragment : ToolbarFragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             try {
-                val result = withContext(Dispatchers.Default) { BunkerParser.parse(raw) }
+                val sourceText = withContext(Dispatchers.IO) {
+                    if (raw.startsWith("https://", ignoreCase = true) || raw.startsWith("http://", ignoreCase = true)) {
+                        downloadSource(raw)
+                    } else raw
+                }
+                val result = withContext(Dispatchers.Default) { BunkerParser.parse(sourceText) }
                 if (result.profiles.isEmpty()) {
                     status.text = "НИЧЕГО НЕ НАЙДЕНО\nПроверь содержимое. Ошибок разбора: ${result.rejectedMessages.size}"
                 } else {
@@ -148,6 +154,29 @@ class BunkerParserFragment : ToolbarFragment() {
                 importButton.isEnabled = true
                 importButton.text = "РАЗОБРАТЬ И ДОБАВИТЬ"
             }
+        }
+    }
+
+    private fun downloadSource(address: String): String {
+        val connection = URL(address).openConnection() as HttpURLConnection
+        connection.connectTimeout = 12_000
+        connection.readTimeout = 20_000
+        connection.instanceFollowRedirects = true
+        connection.setRequestProperty("User-Agent", "BunkerCat-Overdrive/0.1")
+        return try {
+            connection.connect()
+            if (connection.responseCode !in 200..299) {
+                throw IllegalStateException("Сервер вернул HTTP ${connection.responseCode}")
+            }
+            connection.inputStream.bufferedReader(Charsets.UTF_8).use { reader ->
+                val body = reader.readText()
+                if (body.length > 8 * 1024 * 1024) {
+                    throw IllegalStateException("Файл больше 8 МБ — раздели источник на части")
+                }
+                body
+            }
+        } finally {
+            connection.disconnect()
         }
     }
 

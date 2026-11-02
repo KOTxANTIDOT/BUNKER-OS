@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="bunker_parser">Парсер Бункера</string>
+
     <string name="app_name" translatable="false">Бункер Кота</string>
     <string name="app_name_long" translatable="false">Бункер Кота: OVERDRIVE</string>
     <string name="app_desc">VPN-клиент и парсер конфигураций Бункера Кота.</string>

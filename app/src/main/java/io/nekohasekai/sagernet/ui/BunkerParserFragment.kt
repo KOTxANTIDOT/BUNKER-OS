@@ -2,6 +2,7 @@ package io.nekohasekai.sagernet.ui
 
 import android.graphics.Color
 import android.os.Bundle
+import android.net.Uri
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.core.view.setPadding
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.card.MaterialCardView
 import io.nekohasekai.sagernet.R
@@ -31,6 +33,11 @@ class BunkerParserFragment : ToolbarFragment() {
     private lateinit var input: EditText
     private lateinit var status: TextView
     private lateinit var importButton: Button
+    private lateinit var fileButton: Button
+
+    private val openFile = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri: Uri? ->
+        if (uri != null) loadFile(uri)
+    }
 
     override fun onCreateView(
         inflater: android.view.LayoutInflater,
@@ -103,6 +110,18 @@ class BunkerParserFragment : ToolbarFragment() {
             ViewGroup.LayoutParams.MATCH_PARENT, dp(54)
         ).apply { bottomMargin = dp(14) })
 
+        fileButton = Button(context).apply {
+            text = "ОТКРЫТЬ TXT / ФАЙЛ"
+            isAllCaps = false
+            textSize = 13f
+            setTextColor(Color.WHITE)
+            setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.rgb(76, 42, 120)))
+            setOnClickListener { openFile.launch(arrayOf("text/plain", "application/octet-stream", "*/*")) }
+        }
+        column.addView(fileButton, LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT, dp(48)
+        ).apply { bottomMargin = dp(14) })
+
         status = TextView(context).apply {
             text = "ГОТОВ К РАБОТЕ\nПоддерживаются форматы, которые понимает сетевое ядро приложения."
             setTextColor(Color.rgb(170, 176, 194))
@@ -140,7 +159,8 @@ class BunkerParserFragment : ToolbarFragment() {
                 }
                 val result = withContext(Dispatchers.Default) { BunkerParser.parse(sourceText) }
                 if (result.profiles.isEmpty()) {
-                    status.text = "НИЧЕГО НЕ НАЙДЕНО\nПроверь содержимое. Ошибок разбора: ${result.rejectedMessages.size}"
+                    val details = result.rejectedMessages.take(3).joinToString("\n")
+                    status.text = "НИЧЕГО НЕ НАЙДЕНО\nПроверь содержимое. Ошибок разбора: ${result.rejectedMessages.size}" + if (details.isBlank()) "" else "\n\n" + details
                 } else {
                     val added = withContext(Dispatchers.IO) {
                         ProfileManager.addProfileBatch(result.profiles)
@@ -153,6 +173,22 @@ class BunkerParserFragment : ToolbarFragment() {
             } finally {
                 importButton.isEnabled = true
                 importButton.text = "РАЗОБРАТЬ И ДОБАВИТЬ"
+            }
+        }
+    }
+
+    private fun loadFile(uri: Uri) {
+        status.text = "ЧТЕНИЕ ФАЙЛА…"
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                val content = withContext(Dispatchers.IO) {
+                    requireContext().contentResolver.openInputStream(uri)?.bufferedReader(Charsets.UTF_8)?.use { it.readText() }
+                        ?: throw IllegalStateException("Не удалось открыть файл")
+                }
+                input.setText(content)
+                status.text = "ФАЙЛ ЗАГРУЖЕН\nСодержимое готово к разбору: ${content.length} символов."
+            } catch (error: Exception) {
+                status.text = "НЕ УДАЛОСЬ ПРОЧИТАТЬ ФАЙЛ\n${error.message ?: error.javaClass.simpleName}"
             }
         }
     }

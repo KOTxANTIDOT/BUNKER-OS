@@ -13,6 +13,7 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.core.view.setPadding
 import androidx.appcompat.widget.Toolbar
+import com.google.android.material.appbar.AppBarLayout
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.card.MaterialCardView
@@ -58,11 +59,15 @@ class BunkerParserFragment : ToolbarFragment() {
         val screen = LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
             setBackgroundColor(Color.rgb(9, 10, 17))
-            addView(Toolbar(context).apply {
-                id = R.id.toolbar
-                setTitleTextColor(Color.WHITE)
-                setBackgroundColor(Color.TRANSPARENT)
-            }, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(56)))
+            addView(AppBarLayout(context).apply {
+                id = R.id.appbar
+                setBackgroundColor(Color.rgb(9, 10, 17))
+                addView(Toolbar(context).apply {
+                    id = R.id.toolbar
+                    setTitleTextColor(Color.WHITE)
+                    setBackgroundColor(Color.TRANSPARENT)
+                }, AppBarLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(56)))
+            }, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
             addView(scroll, LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f
             ))

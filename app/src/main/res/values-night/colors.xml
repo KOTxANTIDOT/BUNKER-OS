@@ -39,4 +39,5 @@
     <color name="dialog_button_indigo">#9FA8DA</color>
     <color name="dialog_button_brown">#BCAAA4</color>
     <color name="dialog_button_blue_grey">#B0BEC5</color>
+    <color name="card_elevated_bunker">#1B102A</color>
 </resources>

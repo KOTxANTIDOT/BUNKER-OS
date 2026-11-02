@@ -6,7 +6,7 @@
         <item name="colorButtonNormal">?colorAccent</item>
         <item name="colorPrimary">@color/color_verdant_mint</item>
         <item name="colorPrimaryDark">@color/color_verdant_mint_dark</item>
-        <item name="colorAccent">@color/color_verdant_mint_accent</item>
+        <item name="colorAccent">@color/color_bunker_violet</item>
 
         <!-- Bunker Cat mint surface; colour variants may override it -->
         <item name="cardElevatedSurfaceColor">@color/card_elevated_verdant_mint</item>

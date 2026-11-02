@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ScrollView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.setPadding
 import io.nekohasekai.sagernet.R
 import io.nekohasekai.sagernet.database.DataStore
-import io.nekohasekai.sagernet.service.BaseService
+import io.nekohasekai.sagernet.bg.BaseService
 import com.google.android.material.card.MaterialCardView
 
 /** Bunker OVERDRIVE landing screen. The existing service FAB remains the single source of truth for connect/disconnect. */
@@ -30,6 +32,10 @@ class BunkerHomeFragment : ToolbarFragment() {
             setPadding(dp(18))
             setBackgroundColor(Color.rgb(9, 10, 17))
         }
+        val scroll = ScrollView(context).apply {
+            clipToPadding = false
+            addView(root)
+        }
 
         val hero = MaterialCardView(context).apply {
             radius = dp(24).toFloat()
@@ -42,8 +48,13 @@ class BunkerHomeFragment : ToolbarFragment() {
             orientation = LinearLayout.VERTICAL
             setPadding(dp(20))
         }
+        heroContent.addView(ImageView(context).apply {
+            setImageResource(R.drawable.ic_bunker_cat_mark)
+            scaleType = ImageView.ScaleType.FIT_CENTER
+            contentDescription = "Маскот Бункера Кота"
+        }, LinearLayout.LayoutParams(dp(86), dp(86)))
         heroContent.addView(TextView(context).apply {
-            text = "🐈‍⬛  БУНКЕР КОТА"
+            text = "БУНКЕР КОТА"
             setTextColor(Color.WHITE)
             textSize = 25f
             letterSpacing = 0.04f
